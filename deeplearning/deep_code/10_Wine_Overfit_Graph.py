@@ -29,26 +29,28 @@ model.add(Dense(1, activation='sigmoid'))
 
 # 모델 컴파일
 model.compile(loss='binary_crossentropy',
-          optimizer='adam',
-          metrics=['accuracy'])
+              optimizer='adam',
+              metrics=['accuracy'])
 
 # 모델 저장 폴더 설정
 MODEL_DIR = './model/'
 if not os.path.exists(MODEL_DIR):
-   os.mkdir(MODEL_DIR)
+    os.mkdir(MODEL_DIR)
 
 # 모델 저장 조건 설정
-modelpath="./model/{epoch:02d}-{val_loss:.4f}.hdf5"
+modelpath = "./model/{epoch:04d}-{val_loss:.4f}.hdf5"
 checkpointer = ModelCheckpoint(filepath=modelpath, monitor='val_loss', verbose=1, save_best_only=True)
 
 # 모델 실행 및 저장
+# A History object. Its History.history attribute is a record of training loss values and metrics values
+# at successive epochs, as well as validation loss values and validation metrics values (if applicable).
 history = model.fit(X, Y, validation_split=0.33, epochs=3500, batch_size=500)
 
 # y_vloss에 테스트셋으로 실험 결과의 오차 값을 저장
-y_vloss=history.history['val_loss']
+y_vloss = history.history['val_loss']
 
 # y_acc 에 학습 셋으로 측정한 정확도의 값을 저장
-y_acc=history.history['acc']
+y_acc = history.history['acc']
 
 # x값을 지정하고 정확도를 파란색으로, 오차를 빨간색으로 표시
 x_len = numpy.arange(len(y_acc))

@@ -15,9 +15,12 @@ tf.set_random_seed(seed)
 df_pre = pd.read_csv('../dataset/wine.csv', header=None)
 df = df_pre.sample(frac=1)
 
+print(df_pre.head(10))
+print(df_pre.info())
+
 dataset = df.values
-X = dataset[:,0:12]
-Y = dataset[:,12]
+X = dataset[:, 0:12]
+Y = dataset[:, 12]
 
 # 모델의 설정
 model = Sequential()
@@ -28,16 +31,16 @@ model.add(Dense(1, activation='sigmoid'))
 
 # 모델 컴파일
 model.compile(loss='binary_crossentropy',
-          optimizer='adam',
-          metrics=['accuracy'])
+              optimizer='adam',
+              metrics=['accuracy'])
 
 # 모델 저장 폴더 설정
 MODEL_DIR = './model/'
 if not os.path.exists(MODEL_DIR):
-   os.mkdir(MODEL_DIR)
+    os.mkdir(MODEL_DIR)
 
 # 모델 저장 조건 설정
-modelpath="./model/{epoch:02d}-{val_loss:.4f}.hdf5"
+modelpath = "./model/{epoch:03d}-{val_loss:.4f}.hdf5"
 checkpointer = ModelCheckpoint(filepath=modelpath, monitor='val_loss', verbose=1, save_best_only=True)
 
 # 모델 실행 및 저장

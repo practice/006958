@@ -15,8 +15,8 @@ df_pre = pd.read_csv('../dataset/wine.csv', header=None)
 df = df_pre.sample(frac=0.15)
 
 dataset = df.values
-X = dataset[:,0:12]
-Y = dataset[:,12]
+X = dataset[:, 0:12]
+Y = dataset[:, 12]
 
 model = Sequential()
 model.add(Dense(30,  input_dim=12, activation='relu'))
@@ -25,8 +25,8 @@ model.add(Dense(8, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 
 model.compile(loss='binary_crossentropy',
-           optimizer='adam',
-           metrics=['accuracy'])
+              optimizer='adam',
+              metrics=['accuracy'])
 
 # 자동 중단 설정
 early_stopping_callback = EarlyStopping(monitor='val_loss', patience=100)
