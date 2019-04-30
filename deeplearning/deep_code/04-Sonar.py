@@ -21,8 +21,8 @@ print(df.info())
 print(df.head())
 '''
 dataset = df.values
-X = dataset[:,0:60]
-Y_obj = dataset[:,60]
+X = dataset[:, 0:60]
+Y_obj = dataset[:, 60]
 
 # 문자열 변환
 e = LabelEncoder()
@@ -37,8 +37,8 @@ model.add(Dense(1, activation='sigmoid'))
 
 # 모델 컴파일
 model.compile(loss='mean_squared_error',
-            optimizer='adam',
-            metrics=['accuracy'])
+              optimizer='adam',
+              metrics=['accuracy'])
 
 # 모델 실행
 model.fit(X, Y, epochs=200, batch_size=5)

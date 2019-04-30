@@ -27,7 +27,10 @@ model.add(Dense(30, input_dim=17, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 
 # 딥러닝을 실행합니다.
-model.compile(loss='mean_squared_error', optimizer='adam', metrics=['accuracy'])
+# model.compile(loss='mean_squared_error', optimizer='adam', metrics=['accuracy'])
+# Accuracy: 0.8511
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+# Accuracy: 0.8489
 model.fit(X, Y, epochs=30, batch_size=10)
 
 # 결과를 출력합니다.

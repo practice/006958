@@ -21,14 +21,18 @@ print(df.describe())
 
 # 데이터 중 임신 정보와 클래스 만을 출력해 봅니다.
 print(df[['plasma', 'class']])
+print(df[['plasma', 'class']]
+      .groupby(['plasma'], as_index=False)
+      .mean()
+      .sort_values(by='plasma', ascending=True))
 
 # 데이터 간의 상관관계를 그래프로 표현해 봅니다.
 
-colormap = plt.cm.gist_heat   #그래프의 색상 구성을 정합니다.
-plt.figure(figsize=(12,12))   #그래프의 크기를 정합니다.
+colormap = plt.cm.gist_heat   # 그래프의 색상 구성을 정합니다.
+plt.figure(figsize=(12, 12))   # 그래프의 크기를 정합니다.
 
 # 그래프의 속성을 결정합니다. vmax의 값을 0.5로 지정해 0.5에 가까울 수록 밝은 색으로 표시되게 합니다.
-sns.heatmap(df.corr(),linewidths=0.1,vmax=0.5, cmap=colormap, linecolor='white', annot=True)
+sns.heatmap(df.corr(), linewidths=0.1, vmax=0.5, cmap=colormap, linecolor='white', annot=True)
 plt.show()
 
 grid = sns.FacetGrid(df, col='class')

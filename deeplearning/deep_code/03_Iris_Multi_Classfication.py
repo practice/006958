@@ -15,16 +15,16 @@ numpy.random.seed(seed)
 tf.set_random_seed(seed)
 
 # 데이터 입력
-df = pd.read_csv('../dataset/iris.csv', names = ["sepal_length", "sepal_width", "petal_length", "petal_width", "species"])
+df = pd.read_csv('../dataset/iris.csv', names=["sepal_length", "sepal_width", "petal_length", "petal_width", "species"])
 
 # 그래프로 확인
-sns.pairplot(df, hue='species');
+sns.pairplot(df, hue='species')
 plt.show()
 
 # 데이터 분류
 dataset = df.values
-X = dataset[:,0:4].astype(float)
-Y_obj = dataset[:,4]
+X = dataset[:, 0:4].astype(float)
+Y_obj = dataset[: ,4]
 
 # 문자열을 숫자로 변환
 e = LabelEncoder()
@@ -39,8 +39,8 @@ model.add(Dense(3, activation='softmax'))
 
 # 모델 컴파일
 model.compile(loss='categorical_crossentropy',
-            optimizer='adam',
-            metrics=['accuracy'])
+              optimizer='adam',
+              metrics=['accuracy'])
 
 # 모델 실행
 model.fit(X, Y_encoded, epochs=50, batch_size=1)
